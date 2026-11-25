@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aula virtual Ética y Deontología</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: institucional, sobrio, cercano; un aula que acompaña al patrullero en formación.
+   IDEA: la libreta de servicio y el tablero de la estación: ruta clara, decisiones registradas.
+   PICTURE: el caso ramificado "Turno de noche" y la ruta de 8 semanas como columna vertebral.
+   COLOUR and TYPE: verde institucional profundo, blanco, acento ámbar; Barlow Condensed + Source Sans 3.
+   LAYOUT: barra superior, menú lateral de secciones tipo Moodle, contenido en una columna amplia. */
+:root{color-scheme:light dark;
+--bg:light-dark(#f6f7f4,#0d1512);--panel:light-dark(#ffffff,#15201b);--ink:light-dark(#14201a,#e8efe9);
+--muted:light-dark(#4d5c54,#a9b8af);--green:light-dark(#0b5d3b,#2f9a68);--deep:#073d27;--amber:light-dark(#b86e00,#f0a93a);
+--line:light-dark(#d9e1dc,#2a3a32);--soft:light-dark(#e8f1ec,#1b2b23)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Source Sans 3",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:"Barlow Condensed",sans-serif;line-height:1.08;text-wrap:balance;margin:0 0 .4em}
+h1{font-size:clamp(30px,4vw,46px)}h2{font-size:32px}h3{font-size:22px}
+header{background:var(--deep);color:#fff;padding:18px max(4vw,16px);display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+header .seal{width:54px;height:54px;flex:none}
+header small{display:block;opacity:.8;font-size:14px}
+.wrap{display:grid;grid-template-columns:250px minmax(0,1fr);max-width:1240px;margin:0 auto}
+nav{padding:20px 12px;position:sticky;top:0;align-self:start}
+nav a{display:block;padding:10px 14px;border-radius:8px;color:var(--ink);text-decoration:none;font-weight:600;min-height:44px}
+nav a:hover{background:var(--soft)}nav a.on{background:var(--green);color:#fff}
+nav .grp{font-size:13px;color:var(--muted);margin:14px 14px 4px}
+main{padding:24px clamp(16px,3vw,40px) 60px}
+section.view{display:none}section.view.on{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:18px}
+.hero{background:linear-gradient(135deg,#0b5d3b,#073d27);color:#fff;border:0;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:20px;align-items:center}
+.hero p{color:#e3efe8}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:12px}
+.facts div{background:var(--soft);border-radius:8px;padding:10px 12px}.facts b{display:block;font-size:13px;color:var(--muted);font-weight:600}
+.post{border-left:4px solid var(--green);padding:12px 16px;background:var(--panel);border-radius:0 10px 10px 0;margin:12px 0;border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.post .who{font-weight:700}.post .when{font-size:13px;color:var(--muted)}
+.post.teacher{border-left-color:var(--amber)}
+.reply{margin-left:28px}
+.note{font-size:13px;color:var(--muted)}
+label{font-weight:600;display:block;margin:10px 0 4px}
+input,textarea,select{width:100%;font:16px "Source Sans 3",sans-serif;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+textarea{min-height:110px}
+button{font:600 16px "Source Sans 3",sans-serif;min-height:44px;padding:10px 18px;border-radius:8px;border:0;background:var(--green);color:#fff;cursor:pointer;margin-top:10px}
+button.alt{background:transparent;color:var(--green);border:2px solid var(--green)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.route{position:relative;padding-left:26px}
+.route:before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:3px;background:var(--green)}
+.wk{position:relative;margin-bottom:14px}
+.wk:before{content:"";position:absolute;left:-23px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--panel);border:3px solid var(--green)}
+.wk .t{font-family:"Barlow Condensed";font-size:20px;font-weight:700;white-space:nowrap}
+.tag{display:inline-block;font-size:13px;background:var(--soft);border-radius:999px;padding:2px 10px;margin:2px 4px 2px 0}
+.tag.s{background:var(--amber);color:#1a1200}
+table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+th{background:var(--soft)}
+.scroll{overflow-x:auto}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{margin:0}
+.concepts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.concepts .card{margin:0}
+.steps{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.steps .card{flex:0 0 min(300px,85%);scroll-snap-align:start;margin:0}
+.scene{background:var(--deep);color:#fff;border-radius:12px;padding:20px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:18px;align-items:center}
+.scene p{color:#e3efe8}
+.opt{display:block;width:100%;text-align:left;background:var(--panel);color:var(--ink);border:2px solid var(--line)}
+.opt:hover{border-color:var(--green)}
+.fb{padding:14px;border-radius:10px;margin-top:12px;background:var(--soft)}
+.meter{height:12px;border-radius:6px;background:var(--line);overflow:hidden}.meter i{display:block;height:100%;background:var(--amber);transition:width .5s}
+.q{margin-bottom:16px}.q .opt{margin-top:6px}
+.ok{border-color:#2f9a68!important}.bad{border-color:#c0392b!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:860px){.wrap{grid-template-columns:1fr}nav{position:static;display:flex;flex-wrap:wrap;gap:4px;padding:10px}nav .grp{width:100%;margin:6px 4px 0}nav a{padding:8px 12px}.hero,.scene{grid-template-columns:1fr}.scene svg{max-width:200px}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;font-weight:600}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<header>
+<svg class="seal" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="28" fill="#0b5d3b" stroke="#f0a93a" stroke-width="3"/><path d="M30 12l14 6v11c0 10-6 16-14 19-8-3-14-9-14-19V18z" fill="#fff"/><path d="M24 30l4 4 8-9" stroke="#0b5d3b" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg>
+<div><h1 style="margin:0;font-size:clamp(26px,3.4vw,38px)">Ética y Deontología</h1><small>Técnico Profesional en Servicio de Policía · II semestre · 2 créditos · Modalidad virtual</small></div>
+</header>
+<div class="wrap">
+<nav id="nav">
+<div class="grp">Ambientación</div>
+<a href="#inicio">Bienvenida</a><a href="#foro-bienvenida">Foro de bienvenida</a><a href="#foro-presentacion">Foro de presentación</a><a href="#ruta">Ruta didáctica</a>
+<div class="grp">Unidades</div>
+<a href="#unidad-1">Unidad 1 · Ética</a><a href="#unidad-2">Unidad 2 · Deontología</a><a href="#unidad-3">Unidad 3 · Dilemas</a>
+<div class="grp">Recurso y evaluación</div>
+<a href="#recurso">Recurso: Turno de noche</a><a href="#evaluacion">Momentos evaluativos</a>
+</nav>
+<main>
+
+<section class="view" id="v-inicio">
+<div class="card hero">
+<div><h2 style="font-size:clamp(28px,3.4vw,40px)">Bienvenidos al curso que pone a prueba lo que haremos cuando nadie nos vea</h2>
+<p>Reciban un saludo cordial. Durante ocho semanas recorreremos los fundamentos de la ética, los deberes que la deontología impone a quien porta el uniforme y los dilemas reales del servicio de policía. Aquí no se memoriza un código: se aprende a decidir con él, a argumentar frente a los compañeros y a sostener esa decisión ante el ciudadano.</p>
+<p>Les pido revisar la ruta didáctica, presentarse en el foro y resolver el diagnóstico de la semana uno. Cuentan con acompañamiento permanente: escriban en el foro de dudas y recibirán respuesta en un plazo máximo de 24 horas hábiles.</p>
+<p><b>Docente del curso</b> · Profesional en Psicología con formación en Educación</p></div>
+<svg viewBox="0 0 240 200" role="img" aria-label="Balanza sobre un escudo"><circle cx="120" cy="100" r="92" fill="#0f6c46"/><path d="M120 30l60 24v44c0 40-26 64-60 76-34-12-60-36-60-76V54z" fill="#fff" opacity=".95"/><line x1="120" y1="62" x2="120" y2="140" stroke="#073d27" stroke-width="5"/><line x1="84" y1="78" x2="156" y2="78" stroke="#073d27" stroke-width="5" stroke-linecap="round"/><path d="M84 78l-14 30h28z M156 78l-14 30h28z" fill="#f0a93a"/><rect x="104" y="138" width="32" height="8" rx="3" fill="#073d27"/></svg>
+</div>
+<div class="card"><h3>Identificación del curso</h3>
+<div class="facts"><div><b>Programa</b>Técnico Profesional en Servicio de Policía</div><div><b>Periodo</b>II semestre</div><div><b>Créditos</b>2 (96 horas)</div><div><b>Acompañamiento</b>32 h (16 sincrónicas)</div><div><b>Trabajo independiente</b>64 h</div><div><b>Duración</b>8 semanas</div></div></div>
+<div class="card"><h3>Competencia del curso</h3><p>Aplicar principios de ética, deontología y valores institucionales para fortalecer la toma de decisiones en el ámbito del servicio de policía.</p>
+<h3>Resultados de aprendizaje</h3><p><span class="tag">RA1</span> Explicar los conceptos, clases y principios de la ética en relación con la función del servidor público y policial.<br><span class="tag">RA2</span> Diferenciar los deberes deontológicos del policía frente a situaciones del servicio y del uso de los recursos públicos.<br><span class="tag">RA3</span> Resolver dilemas éticos y conflictos de interés del servicio de policía con base en los valores institucionales y la normatividad vigente.</p></div>
+</section>
+
+<section class="view" id="v-foro-bienvenida">
+<h2>Foro de bienvenida</h2><p class="note">Espacio de avisos del docente. Pueden responder para confirmar lectura o plantear inquietudes generales.</p>
+<div id="fb-posts"></div>
+<div class="card"><h3>Responder al foro</h3><form id="fb-form"><label for="fb-name">Nombre</label><input id="fb-name" required><label for="fb-text">Mensaje</label><textarea id="fb-text" required></textarea><button>Publicar respuesta</button></form><p class="note">Prototipo: las respuestas se guardan solo en este navegador.</p></div>
+</section>
+
+<section class="view" id="v-foro-presentacion">
+<h2>Foro de presentación</h2>
+<div class="card"><h3>Consigna</h3><p>Preséntense ante el grupo contando su nombre, la ciudad o unidad donde realizan su formación, qué los llevó a elegir el servicio de policía, cuál de los valores del Código de Integridad (honestidad, respeto, compromiso, diligencia o justicia) los representa mejor y por qué, y qué esperan del curso. Después, respondan al menos a dos compañeros buscando algo que tengan en común con ellos.</p><p><span class="tag">Semana 1</span><span class="tag">Formativa, sin calificación</span><span class="tag">Escala de valoración de participación</span></p></div>
+<div id="fp-posts"></div>
+<div class="card"><h3>Mi presentación</h3><form id="fp-form"><label for="fp-name">Nombre</label><input id="fp-name" required><label for="fp-text">Presentación</label><textarea id="fp-text" required></textarea><button>Publicar</button></form><p class="note">Las tres primeras publicaciones son ejemplos de cómo se vería el foro.</p></div>
+</section>
+
+<section class="view" id="v-ruta">
+<h2>Ruta didáctica</h2><p>Ocho semanas, tres unidades. Cada unidad avanza de la comprensión al análisis crítico y de ahí a la aplicación.</p>
+<div class="card"><div class="route" id="route"></div></div>
+</section>
+
+<section class="view" id="v-unidad-1"></section>
+<section class="view" id="v-unidad-2"></section>
+<section class="view" id="v-unidad-3"></section>
+
+<section class="view" id="v-recurso">
+<h2>Decidir con integridad: caso interactivo «Turno de noche»</h2>
+<p>Recurso propio de la unidad 3. Recorran primero las ideas clave, revisen el modelo de decisión y luego tomen las decisiones del caso. Al final, lleven su reflexión al foro de debate.</p>
+<div class="tabs"><button data-t="t1">Ideas clave</button><button class="alt" data-t="t2">Modelo de decisión</button><button class="alt" data-t="t3">Caso</button></div>
+<div id="t1" class="tab"><div class="concepts" id="concepts"></div><p class="note">Valores tomados del Código de Integridad del Servicio Público Colombiano, adoptado por la Ley 2016 de 2020.</p></div>
+<div id="t2" class="tab" hidden><p>Desplacen las tarjetas para ver cada momento.</p><div class="steps" id="steps"></div><button class="alt" id="prevS">Anterior</button> <button class="alt" id="nextS">Siguiente</button></div>
+<div id="t3" class="tab" hidden>
+<div class="scene"><div><h3 id="c-title">Turno de noche</h3><p id="c-text"></p></div>
+<svg viewBox="0 0 220 160" aria-hidden="true"><rect x="0" y="110" width="220" height="50" fill="#0b2a1c"/><rect x="20" y="40" width="70" height="72" fill="#f0a93a" opacity=".85"/><rect x="30" y="52" width="20" height="18" fill="#073d27"/><rect x="60" y="52" width="20" height="18" fill="#073d27"/><rect x="110" y="78" width="90" height="34" rx="8" fill="#fff"/><rect x="124" y="64" width="54" height="22" rx="6" fill="#fff"/><rect x="110" y="92" width="90" height="6" fill="#0b5d3b"/><circle cx="132" cy="114" r="10" fill="#14201a"/><circle cx="182" cy="114" r="10" fill="#14201a"/><circle cx="170" cy="20" r="9" fill="#f3f1d6"/></svg></div>
+<div id="c-opts" style="margin-top:12px"></div><div id="c-fb"></div>
+<div class="card" style="margin-top:16px"><b>Coherencia ética acumulada</b><div class="meter" style="margin-top:8px"><i id="c-meter" style="width:0"></i></div><p class="note" id="c-score"></p></div>
+</div>
+</section>
+
+<section class="view" id="v-evaluacion">
+<h2>Momentos evaluativos</h2>
+<div class="tabs"><button data-e="e1">Diagnóstica</button><button class="alt" data-e="e2">Formativa</button><button class="alt" data-e="e3">Sumativa final</button></div>
+<div id="e1" class="etab card"><h3>Prueba diagnóstica (semana 1)</h3><p>No califica. Sirve para que el docente ajuste el ritmo de la unidad 1 y para que cada uno identifique lo que ya sabe.</p><div id="quiz"></div><button id="qbtn">Ver resultado</button><p id="qres" class="fb" hidden></p></div>
+<div id="e2" class="etab card" hidden><h3>Evaluación formativa</h3><div class="scroll"><table class="stack"><thead><tr><th>Actividad</th><th>Semana</th><th>Retroalimentación</th><th>Instrumento</th></tr></thead><tbody id="form-t"></tbody></table></div></div>
+<div id="e3" class="etab card" hidden><h3>Análisis de caso y pitch ético (35 %)</h3><p>En grupos de cuatro, analicen el caso asignado aplicando el modelo de decisión ética, construyan el mapa de decisión en Miro y sustenten su postura en un pitch de tres minutos durante el encuentro sincrónico de la semana 8. Cada estudiante coevalúa a otro grupo con la misma rúbrica.</p>
+<div class="scroll"><table class="stack"><thead><tr><th>Criterio</th><th>Superior (5)</th><th>Alto (4)</th><th>Básico (3)</th><th>Bajo (1-2)</th></tr></thead><tbody id="rub"></tbody></table></div></div>
+</section>
+<footer style="border-top:1px solid var(--line);margin-top:30px;padding-top:14px;font-size:14px;color:var(--muted)">Elaborado por: Dario Fernando Muñoz Ortega · Prototipo de diseño instruccional · Ética y Deontología · 2026</footer>
+</main></div>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const views=['inicio','foro-bienvenida','foro-presentacion','ruta','unidad-1','unidad-2','unidad-3','recurso','evaluacion'];
+function show(){const h=location.hash.slice(1);const v=views.includes(h)?h:'inicio';
+document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+v));window.scrollTo(0,0)}
+addEventListener('hashchange',show);
+
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const fbSeed=[
+{w:'Docente del curso',t:'Lunes, semana 1',teacher:1,x:'Bienvenidos al curso Ética y Deontología. Este foro concentra los avisos generales. Cada lunes encontrarán aquí la apertura de la semana con lo que se espera de ustedes; los jueves, a las 7:00 p. m., nos veremos en el encuentro sincrónico por Teams. Comiencen por la ruta didáctica y por el foro de presentación.'},
+{w:'Docente del curso',t:'Lunes, semana 1',teacher:1,x:'Acuerdos de convivencia en el aula: escribimos con respeto y en lenguaje institucional; discrepamos de las ideas, nunca de las personas; citamos la fuente cuando usamos una norma o un autor; no compartimos datos personales ni información reservada del servicio; publicamos los aportes dentro de las fechas para que los compañeros puedan responder.'},
+{w:'Andrés Felipe M.',t:'Martes, semana 1',x:'Recibido, docente. Una pregunta: ¿los encuentros sincrónicos quedan grabados para quienes estemos de turno?',r:{w:'Docente del curso',x:'Sí, Andrés Felipe. Cada grabación queda en la sección de la semana dentro de las 24 horas siguientes, junto con la presentación usada.'}}];
+const fpSeed=[
+{w:'Laura Sofía P.',t:'Martes, semana 1',x:'Soy Laura Sofía, realizo mi formación en Pasto. Elegí el servicio de policía porque en mi barrio vi cómo un cuadrante cambió la relación con los jóvenes. Me identifico con el respeto: creo que el trato digno abre puertas que la autoridad sola no abre. Espero aprender a resolver situaciones donde la norma no da una respuesta inmediata.'},
+{w:'Juan Camilo R.',t:'Martes, semana 1',x:'Hola a todos, soy Juan Camilo, de Ipiales. Mi papá fue suboficial y crecí escuchando sus historias de servicio. El valor que me representa es la diligencia, porque no me gusta dejar las cosas a medias. Del curso espero herramientas para no dudar cuando alguien intente ofrecer un favor a cambio de algo.',r:{w:'Laura Sofía P.',x:'Juan Camilo, compartimos que el servicio nos llegó desde casa. Lo del favor a cambio de algo me parece justo el tipo de caso que vamos a analizar.'}},
+{w:'Valentina G.',t:'Miércoles, semana 1',x:'Soy Valentina y me formo en Tumaco. Me motiva servir a una región que necesita confianza en la institución. Elijo la honestidad. Quiero salir del curso sabiendo argumentar mis decisiones, no solo seguir órdenes.'}];
+function renderForum(id,key,seed){const extra=store.get(key,[]);const all=seed.concat(extra);
+$(id).innerHTML=all.map(p=>`<div class="post${p.teacher?' teacher':''}"><div class="who">${esc(p.w)}</div><div class="when">${esc(p.t||'Ahora')}</div><p>${esc(p.x)}</p></div>${p.r?`<div class="post reply teacher"><div class="who">${esc(p.r.w)}</div><p>${esc(p.r.x)}</p></div>`:''}`).join('')}
+function bindForm(f,n,x,id,key,seed){$(f).addEventListener('submit',e=>{e.preventDefault();const l=store.get(key,[]);l.push({w:$(n).value.trim(),t:'Ahora',x:$(x).value.trim()});store.set(key,l);$(x).value='';renderForum(id,key,seed)})}
+renderForum('#fb-posts','fb',fbSeed);renderForum('#fp-posts','fp',fpSeed);
+bindForm('#fb-form','#fb-name','#fb-text','#fb-posts','fb',fbSeed);bindForm('#fp-form','#fp-name','#fp-text','#fp-posts','fp',fpSeed);
+
+const weeks=[
+['Semana 1','Ambientación y diagnóstico','Bienvenida, foro de presentación, prueba diagnóstica en Educaplay, lectura de la guía del curso.',['Moodle','Educaplay'],''],
+['Semana 2','Unidad 1 · Ética y moral','Lectura guiada y video corto; muro colaborativo en Padlet con situaciones cotidianas del servicio clasificadas como dilemas morales o normas.',['Padlet','Teams'],'Padlet 10 %'],
+['Semana 3','Unidad 1 · Principios y valores','Infografía individual en Canva sobre los valores del Código de Integridad aplicados a un procedimiento.',['Canva'],'Infografía 15 %'],
+['Semana 4','Unidad 2 · Deontología policial','Cine foro: análisis de una película sobre corrupción policial; debate en foro con un aporte y dos réplicas argumentadas.',['Foro Moodle','Teams'],'Foro 15 %'],
+['Semana 5','Unidad 2 · Deberes y recursos públicos','Cuadro comparativo grupal en Miro: deberes, prohibiciones y faltas frente al uso de bienes del Estado.',['Miro'],'Cuadro 15 %'],
+['Semana 6','Unidad 3 · Dilemas y conflicto de interés','Recurso interactivo «Turno de noche» y reflexión en el foro de debate.',['Recurso propio','Foro Moodle'],''],
+['Semana 7','Unidad 3 · Juego de roles','Simulación sincrónica de un procedimiento con dilema; registro del mapa de decisión en Miro.',['Teams','Miro'],'Juego de roles 10 %'],
+['Semana 8','Unidad 3 · Cierre','Análisis de caso grupal, pitch ético de tres minutos y coevaluación con rúbrica.',['Moodle','Teams'],'Caso y pitch 35 %']];
+$('#route').innerHTML=weeks.map(w=>`<div class="wk"><div class="t">${w[0]} · ${w[1]}</div><p style="margin:.2em 0">${w[2]}</p>${w[3].map(t=>`<span class="tag">${t}</span>`).join('')}${w[4]?`<span class="tag s">${w[4]}</span>`:''}</div>`).join('');
+
+const units=[
+{n:1,t:'Concepto, clases y principios de la ética',ra:'RA1. Explicar los conceptos, clases y principios de la ética en relación con la función del servidor público y policial.',c:'Ética y moral: diferencias y relación. Clases de ética: normativa, aplicada, profesional y pública. Axiología y valores. Principios del servicio público y valores del Código de Integridad.',p:'Distinguir juicios éticos, morales y normativos en situaciones del servicio; organizar conceptos en una infografía.',a:'Disposición reflexiva sobre la propia conducta; respeto por las opiniones divergentes en el aula.',s:['Comprensión: lectura guiada y video corto con preguntas orientadoras.','Análisis crítico: muro en Padlet donde cada estudiante publica una situación del servicio y comenta dos de sus compañeros.','Aplicación: infografía en Canva que relaciona un valor del Código de Integridad con un procedimiento policial.']},
+{n:2,t:'Concepto, historia y tipos de la deontología',ra:'RA2. Diferenciar los deberes deontológicos del policía frente a situaciones del servicio y del uso de los recursos públicos.',c:'Deontología: concepto, origen y tipos. Deberes del servidor público. Disciplina policial y Estatuto Disciplinario Policial (Ley 2196 de 2022). Gestión y cuidado de los recursos públicos.',p:'Identificar deberes, prohibiciones y faltas en un caso; comparar conductas a la luz de la norma.',a:'Sentido de responsabilidad frente a los bienes del Estado; apertura al debate argumentado.',s:['Comprensión: lectura comentada de apartes del Estatuto Disciplinario Policial y esquema de deberes.','Análisis crítico: cine foro con debate en el foro de Moodle (un aporte y dos réplicas con sustento).','Aplicación: cuadro comparativo grupal en Miro sobre conductas frente al uso de recursos públicos.']},
+{n:3,t:'Dilemas éticos en el servicio de policía',ra:'RA3. Resolver dilemas éticos y conflictos de interés del servicio de policía con base en los valores institucionales y la normatividad vigente.',c:'Dilema ético y conflicto de interés. Modelo de toma de decisiones éticas. Código de Integridad del Servicio Público (Ley 2016 de 2020).',p:'Aplicar el modelo de decisión a casos simulados; argumentar y sustentar una decisión ante pares.',a:'Coherencia entre lo que se decide y lo que se argumenta; trato digno al ciudadano.',s:['Comprensión: recurso interactivo «Turno de noche».','Análisis crítico: juego de roles sincrónico con casos simulados.','Aplicación: análisis de caso grupal, pitch ético y coevaluación.']}];
+units.forEach(u=>{$('#v-unidad-'+u.n).innerHTML=`<h2>Unidad ${u.n} · ${u.t}</h2><div class="card"><b>Resultado de aprendizaje</b><p>${u.ra}</p></div><div class="card"><h3>Contenidos</h3><p><b>Conceptuales.</b> ${u.c}</p><p><b>Procedimentales.</b> ${u.p}</p><p><b>Actitudinales.</b> ${u.a}</p></div><div class="card"><h3>Secuencia de actividades</h3>${u.s.map(x=>`<p>${x}</p>`).join('')}</div>`});
+
+const concepts=[['Ética','Reflexión racional sobre lo que está bien o mal hacer; pide razones, no solo costumbre.'],['Moral','Conjunto de normas y costumbres que un grupo considera correctas; se vive antes de pensarse.'],['Deontología','Deberes propios de una profesión. En el policía se expresan en la disciplina y en el Estatuto Disciplinario Policial.'],['Conflicto de interés','Situación en la que un interés personal, familiar o económico puede inclinar una decisión que debe ser imparcial.'],['Honestidad','Actuar con verdad, transparencia y rectitud, favoreciendo siempre el interés general.'],['Respeto','Reconocer y tratar con dignidad a toda persona, sin importar su condición.'],['Compromiso','Estar dispuesto a comprender y atender las necesidades de las personas con quienes se trabaja.'],['Diligencia','Cumplir deberes y funciones con atención, prontitud y cuidado de los recursos públicos.'],['Justicia','Actuar con imparcialidad, garantizando derechos con equidad y sin discriminación.']];
+$('#concepts').innerHTML=concepts.map(c=>`<div class="card"><h3>${c[0]}</h3><p style="margin:0">${c[1]}</p></div>`).join('');
+const steps=[['Reconocer','¿Hay valores en tensión o solo una duda técnica?'],['Precisar los hechos','Quién está involucrado, qué se sabe y qué se supone.'],['Revisar norma y valores','Qué dicen el Estatuto Disciplinario Policial y el Código de Integridad.'],['Generar alternativas','Al menos tres caminos posibles, incluido el que incomoda.'],['Decidir y justificar','¿Podría explicar la decisión al ciudadano, al superior y a la prensa?'],['Revisar consecuencias','Efectos para el ciudadano, la institución y para mí; qué aprendo.']];
+$('#steps').innerHTML=steps.map((s,i)=>`<div class="card"><span class="tag s">Momento ${i+1}</span><h3>${s[0]}</h3><p style="margin:0">${s[1]}</p></div>`).join('');
+$('#prevS').onclick=()=>$('#steps').scrollBy({left:-300,behavior:'smooth'});$('#nextS').onclick=()=>$('#steps').scrollBy({left:300,behavior:'smooth'});
+
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(t=>t.hidden=t.id!==b.dataset.t);document.querySelectorAll('[data-t]').forEach(x=>x.classList.toggle('alt',x!==b))});
+document.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{document.querySelectorAll('.etab').forEach(t=>t.hidden=t.id!==b.dataset.e);document.querySelectorAll('[data-e]').forEach(x=>x.classList.toggle('alt',x!==b))});
+
+const caseN=[
+{t:'2:10 a. m. · Barrio comercial',x:'Patrullan una zona de bodegas. El dueño de una distribuidora, a quien conocen de vista, se acerca a la patrulla y les dice que, si pasan cada hora por su local, «les colabora con algo para el tinto» todas las semanas. Su compañero lo mira esperando que usted responda.',o:[['Aceptar: es un aporte pequeño y él de verdad necesita seguridad.',0,'El ofrecimiento condiciona el servicio a un beneficio particular. Aunque el monto sea bajo, la honestidad y la justicia exigen que la vigilancia se distribuya por necesidad, no por pago.'],['Rechazar con cortesía, explicar que la vigilancia no se paga y orientarlo a reportar los riesgos por los canales del cuadrante.',2,'Decisión coherente: protege la imparcialidad del servicio y atiende la necesidad legítima del ciudadano sin condicionarla.'],['No responder y seguir el recorrido para evitar problemas.',1,'Evita el beneficio indebido, pero deja sin orientación al ciudadano y sin claridad al compañero. El compromiso pide comunicar la razón de la negativa.']]},
+{t:'3:40 a. m. · Control de vía',x:'En un retén detienen un vehículo con exceso de velocidad. El conductor es primo de su compañero, presenta aliento alcohólico y le pide a su familiar «que esto quede entre nosotros».',o:[['Dejar que el compañero resuelva, al fin y al cabo es su familia.',0,'El vínculo familiar es exactamente lo que configura el conflicto de interés: quien lo tiene no debería decidir el procedimiento.'],['Pedir al compañero que se aparte, realizar el procedimiento conforme a la norma y dejar constancia de la situación ante el superior.',2,'Se reconoce el conflicto de interés, se garantiza un trato igual a cualquier ciudadano y se protege al compañero de una falta disciplinaria.'],['Hacer el procedimiento, pero omitir en el informe el parentesco.',1,'El procedimiento se cumple, pero ocultar el parentesco resta transparencia. Registrarlo es lo que da confianza a la actuación.']]},
+{t:'6:00 a. m. · Fin del turno',x:'Al entregar el turno, otro patrullero le pide prestada la motocicleta institucional para «hacer una vuelta personal rápida» antes de ir a casa.',o:[['Prestarla, solo serán unos minutos.',0,'Los bienes del Estado se destinan al servicio. Su uso personal, aun breve, afecta la diligencia y puede constituir falta.'],['Negarse y recordarle que el vehículo debe quedar registrado en la entrega de turno.',2,'Cuida el recurso público y la trazabilidad de la entrega, sin romper la relación con el compañero.'],['Prestarla, pero sin anotarlo en la minuta.',0,'Suma dos problemas: uso indebido del bien y ocultamiento del hecho en el registro.']]}];
+let ci=0,score=0;
+function drawCase(){if(ci>=caseN.length){$('#c-title').textContent='Cierre del caso';$('#c-text').textContent='Revise su recorrido. Lleve al foro de debate de la semana 6 la decisión que más le costó tomar, explicando qué valor del Código de Integridad la sostiene y qué haría distinto.';$('#c-opts').innerHTML='<button id="restart">Volver a empezar</button>';$('#restart').onclick=()=>{ci=0;score=0;upd();drawCase()};$('#c-fb').innerHTML='';return}
+const n=caseN[ci];$('#c-title').textContent=n.t;$('#c-text').textContent=n.x;$('#c-fb').innerHTML='';
+$('#c-opts').innerHTML=n.o.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o[0])}</button>`).join('');
+document.querySelectorAll('#c-opts .opt').forEach(b=>b.onclick=()=>{const o=n.o[+b.dataset.i];score+=o[1];upd();
+document.querySelectorAll('#c-opts .opt').forEach(x=>x.disabled=true);b.classList.add(o[1]===2?'ok':'bad');
+$('#c-fb').innerHTML=`<div class="fb">${esc(o[2])}</div><button id="nx">Continuar</button>`;$('#nx').onclick=()=>{ci++;drawCase()}})}
+function upd(){$('#c-meter').style.width=(score/6*100)+'%';$('#c-score').textContent=`${score} de 6 puntos de coherencia`}
+upd();drawCase();
+
+const quiz=[['La ética se diferencia de la moral porque:',['Es un conjunto de costumbres de un grupo','Reflexiona sobre las razones de lo que se considera correcto','Solo aplica a profesionales'],1],['La deontología estudia:',['Los deberes propios de una profesión','La historia de la policía','Las sanciones penales'],0],['Un conflicto de interés se presenta cuando:',['Dos policías discuten un procedimiento','Un interés personal puede inclinar una decisión que debe ser imparcial','El ciudadano no está de acuerdo con la decisión'],1],['¿Cuál de estos es un valor del Código de Integridad del Servicio Público?',['Lealtad al superior','Diligencia','Obediencia'],1],['Usar un vehículo oficial para una diligencia personal afecta principalmente:',['El cuidado de los recursos públicos','La libertad de expresión','La autonomía del ciudadano'],0]];
+$('#quiz').innerHTML=quiz.map((q,i)=>`<div class="q"><b>${i+1}. ${q[0]}</b>${q[1].map((o,j)=>`<label style="font-weight:400"><input type="radio" name="q${i}" value="${j}" style="width:auto"> ${o}</label>`).join('')}</div>`).join('');
+$('#qbtn').onclick=()=>{let ok=0;quiz.forEach((q,i)=>{const c=document.querySelector(`input[name=q${i}]:checked`);if(c&&+c.value===q[2])ok++});const r=$('#qres');r.hidden=false;r.textContent=ok>=4?`${ok} de 5. Tiene una base sólida; en la unidad 1 profundizará en los principios.`:`${ok} de 5. La unidad 1 le dará los conceptos que necesita; revise con atención la lectura guiada.`};
+const form=[['Muro colaborativo en Padlet','2','Comentarios del docente y de dos compañeros en cada publicación','Escala de valoración'],['Infografía en Canva','3','Retroalimentación escrita individual en Moodle','Lista de cotejo'],['Foro de cine foro','4','Réplicas entre pares y síntesis del docente','Escala de valoración'],['Cuadro comparativo en Miro','5','Comentarios sobre el tablero grupal','Lista de cotejo'],['Juego de roles','7','Devolución oral inmediata en el encuentro','Escala de valoración']];
+$('#form-t').innerHTML=form.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
+const rub=[['Identificación del dilema','Reconoce los valores en tensión y el conflicto de interés con precisión','Reconoce el dilema con alguna imprecisión','Describe la situación sin identificar el dilema','No identifica el problema ético'],['Fundamentación normativa y axiológica','Relaciona con exactitud el Estatuto Disciplinario Policial y el Código de Integridad','Usa la norma con apoyos parciales','Menciona normas sin relacionarlas','No usa referentes'],['Alternativas y decisión','Propone varias alternativas y justifica la elegida con sus consecuencias','Justifica la decisión con pocas alternativas','Decide sin justificar','No toma decisión'],['Pitch y trabajo colaborativo','Exposición clara en tres minutos con participación de todos','Exposición clara con participación desigual','Exposición desordenada','No presenta']];
+$('#rub').innerHTML=rub.map(r=>`<tr>${r.map((c,i)=>i?`<td>${c}</td>`:`<td><b>${c}</b></td>`).join('')}</tr>`).join('');
+show();
+}
+</script>
+</body>
+</html>
